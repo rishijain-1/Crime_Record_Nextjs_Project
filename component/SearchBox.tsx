@@ -47,7 +47,34 @@ const SearchBox = () => {
           Search
         </button>
       </form>
-      
+      {loading && <p className="text-blue-500">Loading...</p>}
+      {error && <p className="text-red-500">Error: {error}</p>}
+      {results.length > 0 && (
+        <div className="overflow-x-auto w-full">
+          <table className="min-w-full bg-white border border-gray-200">
+            <thead>
+              <tr>
+                <th className="py-2 px-4 border-b">Case Number</th>
+                <th className="py-2 px-4 border-b">Date</th>
+                <th className="py-2 px-4 border-b">Description</th>
+                <th className="py-2 px-4 border-b">Location</th>
+                <th className="py-2 px-4 border-b">Primary Type</th>
+              </tr>
+            </thead>
+            <tbody>
+              {results.map((result) => (
+                <tr key={result._id}>
+                  <td className="py-2 px-4 border-b">{result.CaseNumber}</td>
+                  <td className="py-2 px-4 border-b">{result.Date}</td>
+                  <td className="py-2 px-4 border-b">{result.Description}</td>
+                  <td className="py-2 px-4 border-b">{result.Location}</td>
+                  <td className="py-2 px-4 border-b">{result.PrimaryType}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      )}
     </div>
   );
 };
