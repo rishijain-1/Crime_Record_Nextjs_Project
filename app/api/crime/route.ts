@@ -30,7 +30,6 @@ export const POST = async (req: NextRequest) => {
       ],
     };
 
-    // Execute the query with the constructed 'records' object
     const crime = await CrimeModel.find(records);
 
     if (!crime || crime.length === 0) {

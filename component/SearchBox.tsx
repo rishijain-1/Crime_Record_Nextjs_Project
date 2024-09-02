@@ -6,7 +6,6 @@ import Loading from './Loader/Loading';
 const SearchBox = () => {
   const [query, setQuery] = useState('');
   const [results, setResults] = useState<any[]>([]);
-  const [initialResults, setInitialResults] = useState<any[]>([]);
   const [loadingInitial, setLoadingInitial] = useState(true); // State for initial data loading
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -18,7 +17,6 @@ const SearchBox = () => {
         const res = await fetch('/api/initial-data');
         if (!res.ok) throw new Error('Failed to fetch initial data');
         const data = await res.json();
-        setInitialResults(data);
         setResults(data); // Set initial results as well
       } catch (err: any) {
         setError(err.message);
@@ -36,7 +34,7 @@ const SearchBox = () => {
     setError(null);
 
     try {
-      const res = await fetch(`/api/crime`, {
+      const res = await fetch('/api/crime', {
         method: 'POST',
         body: JSON.stringify({ query }),
       });

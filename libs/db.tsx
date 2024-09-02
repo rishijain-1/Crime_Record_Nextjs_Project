@@ -1,4 +1,4 @@
-import mongoose, { ConnectOptions } from 'mongoose';
+import mongoose from 'mongoose';
 
 const MONGO_URI = process.env.MONGO_URI || 'your-mongodb-connection-string';
 
@@ -8,7 +8,8 @@ const connectMongo = async () => {
   }
 
   try {
-    const conn = await mongoose.connect(MONGO_URI);
+    await mongoose.connect(MONGO_URI);
+    console.log('MongoDB connected');
   } catch (error) {
     console.error('MongoDB connection error:', error);
     throw new Error('Failed to connect to MongoDB');
