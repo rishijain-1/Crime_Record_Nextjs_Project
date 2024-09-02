@@ -1,6 +1,4 @@
-// components/CrimeTable.tsx
-
-import React from 'react';
+import React, { useState } from 'react';
 
 interface CrimeRecord {
   _id: string;
@@ -16,6 +14,12 @@ interface CrimeTableProps {
 }
 
 const CrimeTable: React.FC<CrimeTableProps> = ({ results }) => {
+  const [itemsToShow, setItemsToShow] = useState<number>(100); 
+
+  const handleLoadMore = () => {
+    setItemsToShow(prev => prev + 100); 
+  };
+
   return (
     <div className="overflow-x-auto w-full">
       <table className="min-w-full bg-white border border-gray-200">
@@ -29,7 +33,7 @@ const CrimeTable: React.FC<CrimeTableProps> = ({ results }) => {
           </tr>
         </thead>
         <tbody>
-          {results.map((result) => (
+          {results.slice(0, itemsToShow).map((result) => (
             <tr key={result._id}>
               <td className="py-2 px-4 border-b">{result.CaseNumber}</td>
               <td className="py-2 px-4 border-b">{result.Date}</td>
@@ -40,6 +44,16 @@ const CrimeTable: React.FC<CrimeTableProps> = ({ results }) => {
           ))}
         </tbody>
       </table>
+      {itemsToShow < results.length && (
+        <div className="mt-4 flex justify-center">
+          <button
+            onClick={handleLoadMore}
+            className="bg-blue-500 text-white p-2 rounded"
+          >
+            Load More
+          </button>
+        </div>
+      )}
     </div>
   );
 };
