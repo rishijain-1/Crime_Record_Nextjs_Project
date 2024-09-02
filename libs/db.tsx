@@ -1,18 +1,22 @@
+// libs/db.ts
 import mongoose from 'mongoose';
 
-async function connectMongo(): Promise<void> {
-  const mongoUri = process.env.MONGO_URI ?? '';
-  console.log('Connecting to MongoDB at:', mongoUri);
+const MONGO_URI = process.env.MONGO_URI || 'your-mongodb-connection-string';
+
+const connectMongo = async () => {
+  if (mongoose.connection.readyState === 1) {
+    return; // Connection is already established
+  }
 
   try {
-    await mongoose.connect(mongoUri, {
-      bufferCommands: false,
+    await mongoose.connect(MONGO_URI, {
+      useUnifiedTopology: true,
     });
-    console.log('MongoDB connected successfully');
+    console.log('MongoDB connected');
   } catch (error) {
-    console.error('Error connecting to MongoDB:', error);
-    throw error;
+    console.error('MongoDB connection error:', error);
+    throw new Error('Failed to connect to MongoDB');
   }
-}
+};
 
 export default connectMongo;
