@@ -1,5 +1,4 @@
-// libs/db.ts
-import mongoose from 'mongoose';
+import mongoose, { ConnectOptions } from 'mongoose';
 
 const MONGO_URI = process.env.MONGO_URI || 'your-mongodb-connection-string';
 
@@ -9,10 +8,7 @@ const connectMongo = async () => {
   }
 
   try {
-    await mongoose.connect(MONGO_URI, {
-      useUnifiedTopology: true,
-    });
-    console.log('MongoDB connected');
+    const conn = await mongoose.connect(MONGO_URI);
   } catch (error) {
     console.error('MongoDB connection error:', error);
     throw new Error('Failed to connect to MongoDB');
