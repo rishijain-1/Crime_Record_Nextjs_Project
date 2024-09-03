@@ -3,8 +3,8 @@ import Register from "./register/page"; // Update the path to match the actual f
 
 export default function Home() {
   return (
-    <div>
+    <>
      <Register/>
-    </div>
+    </>
   );
 }

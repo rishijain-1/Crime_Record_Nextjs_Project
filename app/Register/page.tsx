@@ -1,4 +1,4 @@
-import RegisterComp from '@/component/RegisterComponent/Register'
+import RegisterComp from '@/component/RegisterComponent/RegisterComp'
 import React from 'react'
 
  const Register= () => {
@@ -6,4 +6,4 @@ import React from 'react'
     <RegisterComp/>
   )
 }
-export default Register
+export default Register;
