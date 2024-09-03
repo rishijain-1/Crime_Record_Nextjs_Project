@@ -30,7 +30,7 @@ export async function POST(request: NextRequest) {
     console.log(user.id)
     const token = generateToken(user.id); 
     const role = user.role;
-    
+    console.log(role);
 
     return NextResponse.json({ message: `${role} login successful`,userData:token,userType:role}, { status: 200 });
 

@@ -25,12 +25,13 @@ const LoginComp = () => {
     if (response.ok) {
         const result = await response.json(); 
         localStorage.setItem('token', result.userData);
-        alert(result.message); 
-        if(result.userType === 'User'){
-            router.push('/dashboard');
+        alert(result.message);
+        console.log(result.userType); 
+        if(result.userType === "admin"){
+            router.push('/adminDashboard');
         }
         else{
-            router.push('/adminDashboard');
+            router.push('/dashboard');
         }
         
       } else {
