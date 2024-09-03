@@ -1,8 +1,9 @@
 import RegisterComp from '@/component/RegisterComponent/Register'
 import React from 'react'
 
-export const Register= () => {
+ const Register= () => {
   return (
     <RegisterComp/>
   )
 }
+export default Register
