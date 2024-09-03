@@ -18,7 +18,6 @@ export const POST = async (req: NextRequest) => {
     const searchPattern = new RegExp(query, 'i');
 
     console.log(searchPattern);
-    // Create the query to search across multiple fields
     const records = {
       $or: [
         { CaseNumber: searchPattern },
