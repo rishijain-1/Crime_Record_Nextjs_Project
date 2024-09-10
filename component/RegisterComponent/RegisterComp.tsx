@@ -1,10 +1,12 @@
 "use client";
-import Link from "next/link";
+
 import { useForm, SubmitHandler } from "react-hook-form";
 import { useState } from "react";
+import { useTranslations } from "next-intl";
+import { Link } from "@/navigation";
 
 interface FormData {
-  secretKey: string;
+  secretKey: string;  
   name: string;
   email: string;
   password: string;
@@ -12,7 +14,7 @@ interface FormData {
   role: string;
 }
 
-const RegisterComp: React.FC = () => {
+const RegisterComp: React.FC = async () => {
   const {
     register,
     handleSubmit,
@@ -60,14 +62,16 @@ const RegisterComp: React.FC = () => {
     }
   };
 
+  const t = await useTranslations("RegisterPage");
+
   return (
     <div className="flex items-center justify-center min-h-screen bg-black">
       <div className="w-full max-w-md p-8 space-y-6 bg-gray-500 rounded-lg shadow-md">
-        <h2 className="text-2xl font-bold text-white text-center">Register</h2>
+        <h2 className="text-2xl font-bold text-white text-center">{t('title')}</h2>
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
           <div>
             <label htmlFor="name" className="block text-sm font-medium text-white">
-              Name
+              {t('name')}
             </label>
             <input
               type="text"
@@ -81,7 +85,7 @@ const RegisterComp: React.FC = () => {
           </div>
           <div>
             <label htmlFor="email" className="block text-sm font-medium text-white">
-              Email
+             {t('email')}
             </label>
             <input
               type="email"
@@ -101,7 +105,7 @@ const RegisterComp: React.FC = () => {
           </div>
           <div>
             <label htmlFor="password" className="block text-sm font-medium text-white">
-              Password
+              {t('password')}
             </label>
             <input
               type="password"
@@ -121,7 +125,7 @@ const RegisterComp: React.FC = () => {
           </div>
           <div>
             <label htmlFor="confirmPassword" className="block text-sm font-medium text-white mt-3">
-              Confirm Password
+              {t('confirmPassword')}
             </label>
             <input
               type="password"
@@ -144,7 +148,7 @@ const RegisterComp: React.FC = () => {
           </div>
           <div>
             <label htmlFor="role" className="block text-sm font-medium text-white">
-              Role
+              {t('role')}
             </label>
             <select
               id="role"
@@ -162,7 +166,7 @@ const RegisterComp: React.FC = () => {
           {role === "admin" && (
             <div>
               <label htmlFor="secretKey" className="block text-sm font-medium text-white">
-                Secret Key
+                {t('secretKey')}
               </label>
               <input
                 type="password"
@@ -185,14 +189,14 @@ const RegisterComp: React.FC = () => {
               type="submit"
               className="w-full px-4 py-2 font-medium text-white bg-indigo-600 rounded-md hover:bg-indigo-700 focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
             >
-              Register
+              {t('registerbtn')}
             </button>
           </div>
         </form>
         <div className="mt-4 text-center text-sm">
-          Already have an account?{" "}
-          <Link href="/login" className="underline bg-blue-800 rounded-md px-4 py-2 text-white">
-            Sign in
+          {t('alreadyAccount')}
+          <Link href={"/login"} className="underline bg-blue-800 rounded-md px-4 py-2 text-white" >
+            {t('signInBtn')}
           </Link>
         </div>
       </div>

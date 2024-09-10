@@ -2,6 +2,7 @@
 import { useState, useEffect } from 'react';
 import CrimeTable from './CrimeTable';
 import Loading from './Loader/Loading';
+import { useTranslations } from 'next-intl';
 
 const SearchBox = () => {
   const [query, setQuery] = useState('');
@@ -9,6 +10,8 @@ const SearchBox = () => {
   const [loadingInitial, setLoadingInitial] = useState(true); // State for initial data loading
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+
+  const t = useTranslations('DashboardPage');
 
   useEffect(() => {
     const fetchInitialData = async () => {
@@ -57,7 +60,7 @@ const SearchBox = () => {
 
   return (
     <div className="p-4 flex flex-col justify-center items-center h-screen">
-      <h3 className="text-3xl font-bold mb-4">Crime Records</h3>
+      <h3 className="text-3xl font-bold mb-4">{t('title')}</h3>
 
       <form onSubmit={handleSearch} className="mb-4">
         <input
@@ -65,19 +68,19 @@ const SearchBox = () => {
           className="border p-2 rounded w-64 mr-2"
           value={query}
           onChange={(e) => setQuery(e.target.value)}
-          placeholder="Enter case number..."
+          placeholder={t('searchInput')}
         />
         <button type="submit" className="bg-blue-500 text-white p-2 rounded">
-          Search
+          {t('searchBtn')}
         </button>
       </form>
       {loadingInitial ? (
         <div className='flex flex-col text-center justify-center'>
         <Loading />
-        <span className=""> Loading initial data...</span></div>
+        <span className="">{t('loading')}</span></div>
       ) : (
         <>
-          {loading && <p className="text-blue-500"><Loading /> Loading search results...</p>}
+          {loading && <p className="text-blue-500"><Loading />{t('searchLoading')}</p>}
           {error && <p className="text-red-500">Error: {error}</p>}
           <CrimeTable results={results} />
         </>

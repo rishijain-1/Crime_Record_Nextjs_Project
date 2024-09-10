@@ -1,9 +1,9 @@
-"use client"
+"use client";
 
 import { useForm, SubmitHandler } from 'react-hook-form';
-import { useRouter } from 'next/navigation';
 import { useState } from 'react';
-import Link from 'next/link';
+import { useTranslations } from 'next-intl';
+import { useRouter,Link } from '@/navigation'; // assuming this is correctly set up
 
 interface LoginFormInputs {
   email: string;
@@ -15,42 +15,51 @@ const LoginComp = () => {
   const router = useRouter();
   const [error, setError] = useState<string | null>(null);
 
-  const onSubmit: SubmitHandler<LoginFormInputs> = async (data) => {
-    const response = await fetch('/api/login', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(data),
-    });
+  // Use useTranslations without async/await in client components
+  const t = useTranslations("LoginPage");
 
-    if (response.ok) {
-        const result = await response.json(); 
+  const onSubmit: SubmitHandler<LoginFormInputs> = async (data) => {
+    try {
+      const response = await fetch('/api/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data),
+      });
+
+      if (response.ok) {
+        const result = await response.json();
         localStorage.setItem('token', result.userData);
         alert(result.message);
-        console.log(result.userType); 
-        if(result.userType === "admin"){
-            router.push('/adminDashboard');
+        console.log(result.userType);
+
+        // Navigate based on user type
+        if (result.userType === "admin") {
+          router.push('/adminDashboard');
+        } else {
+          router.push('/dashboard');
         }
-        else{
-            router.push('/dashboard');
-        }
-        
       } else {
-        const error = await response.json(); 
-        alert(`Failed to Login: ${error.message}`);
+        const errorResponse = await response.json();
+        setError(`Failed to Login: ${errorResponse.message}`);
       }
+    } catch (err) {
+      setError("An error occurred. Please try again.");
+    }
   };
 
   return (
     <div className="flex items-center justify-center min-h-screen bg-black">
       <div className="w-full max-w-md p-8 space-y-6 bg-gray-100 rounded-lg shadow-md">
-        <h2 className="text-2xl font-bold text-black text-center">Login</h2>
+        <h2 className="text-2xl font-bold text-black text-center">
+          {t('title')}
+        </h2>
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-2">
           <div className="border-b-2 border-indigo-300 border-spacing-3 p-2">
             <label
               htmlFor="email"
               className="block text-sm font-medium text-white-500"
             >
-              Email
+              {t('email')}
             </label>
             <input
               type="email"
@@ -73,7 +82,7 @@ const LoginComp = () => {
               htmlFor="password"
               className="block text-sm font-medium text-white-500"
             >
-              Password
+              {t('password')}
             </label>
             <input
               type="password"
@@ -93,14 +102,14 @@ const LoginComp = () => {
               type="submit"
               className="w-full px-4 py-2 font-medium text-white bg-indigo-600 rounded-md hover:bg-indigo-700 focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
             >
-              Login
+              {t('loginBtn')}
             </button>
           </div>
         </form>
         <div className="mt-4 text-center text-sm">
-          Create an Account{" "}
+          {t('notHaveAccount')}
           <Link href="/" className="underline bg-blue-800 rounded-md px-4 py-2 text-white">
-            Sign up
+            {t('signUpBtn')}
           </Link>
         </div>
       </div>
