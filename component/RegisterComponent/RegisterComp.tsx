@@ -2,8 +2,9 @@
 
 import { useForm, SubmitHandler } from "react-hook-form";
 import { useState } from "react";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { Link } from "@/navigation";
+
 
 interface FormData {
   secretKey: string;  
@@ -26,6 +27,7 @@ const RegisterComp: React.FC = async () => {
 
   const role = watch("role"); // Watch the role selection
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
+  const active =useLocale();
 
   const onSubmit: SubmitHandler<FormData> = async (data: FormData) => {
     const sendData = {
@@ -195,7 +197,7 @@ const RegisterComp: React.FC = async () => {
         </form>
         <div className="mt-4 text-center text-sm">
           {t('alreadyAccount')}
-          <Link href={"/login"} className="underline bg-blue-800 rounded-md px-4 py-2 text-white" >
+          <Link href={{pathname:"/login"}} className="underline bg-blue-800 rounded-md px-4 py-2 text-white">
             {t('signInBtn')}
           </Link>
         </div>

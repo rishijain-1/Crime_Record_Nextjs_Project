@@ -1,9 +1,8 @@
 "use client";
-
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { useState } from 'react';
 import { useTranslations } from 'next-intl';
-import { useRouter,Link } from '@/navigation'; // assuming this is correctly set up
+import { Link, useRouter } from '@/navigation'; // assuming this is correctly set up
 
 interface LoginFormInputs {
   email: string;
