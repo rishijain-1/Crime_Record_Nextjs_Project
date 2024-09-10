@@ -9,7 +9,10 @@ export const routing = defineRouting({
     '/pathnames': {
       en: '/pathnames',
       hi: '/pfadnamen'
-    }
+    },
+    '/login': '/login',
+    '/adminDashboard':'/adminDashboard',
+    '/dashboard':'/dashboard',
   }
 });
 
