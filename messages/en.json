@@ -1,0 +1,39 @@
+{
+    "HomePage": {
+      "title": "Hello world!"
+    },
+    "RegisterPage":{
+        "title": "Register",
+        "name": "Name",
+        "email": "Email",
+        "password": "Password",
+        "confirmPassword": "Confirm Password",
+        "role": "Role",
+        "secretKey": "Secret Key",
+        "registerbtn": "Register",
+        "signInBtn": "Sig in",
+        "alreadyAccount": "Already have an account? "
+    },
+    "LoginPage": {
+        "title": "Login",
+        "email": "Email",
+        "password": "Password",
+        "loginBtn": "Login",
+        "signUpBtn": "Sign Up",
+        "notHaveAccount":"Create an Account "
+    },
+    "AdminPage": {
+        "title": "Crime Report",
+        "searchBtn": "Search",
+        "searchInput": "Enter Crime Number...",
+        "searchLoading": "loading search data...",
+        "loading": "Loading intial data..."
+    },
+    "DashboardPage": {
+        "title": "Crime Report",
+        "searchBtn": "Search",
+        "searchInput": "Enter Crime Number...",
+        "searchLoading": "loading search data...",
+        "loading": "Loading intial data..."
+    }
+  }

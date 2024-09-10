@@ -1,0 +1,39 @@
+{
+    "HomePage": {
+      "title": "Hello duniya!"
+    },
+    "RegisterPage":{
+        "title": "पंजीकरण करवाना",
+        "name": "नाम",
+        "email": "ईमेल",
+        "password": "पासवर्ड",
+        "confirmPassword": "पासवर्ड की पुष्टि कीजिये",
+        "role": "भूमिका",
+        "secretKey": "गुप्त कुंजी",
+        "registerbtn": "पंजीकरण करवाना",
+        "signInBtn": "साइन इन करें",
+        "alreadyAccount": "क्या आपके पास पहले से एक खाता मौजूद है? "
+    },
+    "LoginPage": {
+        "title": "लॉग इन करें",
+        "email": "ईमेल",
+        "password": "पासवर्ड",
+        "loginBtn": "लॉग इन करें",
+        "signUpBtn": "साइन अप करें",
+        "notHaveAccount":"खाता बनाएं "
+    },
+    "AdminPage": {
+        "title": "अपराध रिपोर्ट",
+        "searchBtn": "खोजें",
+        "searchInput": "अपराध संख्या दर्ज करें...",
+        "searchLoading":"खोज परिणाम लोड हो रहे हैं...",
+        "loading":"कृपया प्रतीक्षा करें"
+    },
+    "DashboardPage":{
+        "title": "अपराध रिपोर्ट",
+        "searchBtn": "खोजें",
+        "searchInput": "अपराध संख्या दर्ज करें...",
+        "searchLoading":"खोज परिणाम लोड हो रहे हैं...",
+        "loading":"कृपया प्रतीक्षा करें"
+    }
+  }
