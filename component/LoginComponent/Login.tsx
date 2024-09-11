@@ -3,6 +3,10 @@ import { useForm, SubmitHandler } from 'react-hook-form';
 import { useState } from 'react';
 import { useTranslations } from 'next-intl';
 import { Link, useRouter } from '@/navigation'; // assuming this is correctly set up
+import { signIn, useSession } from 'next-auth/react';
+import { getCurrentUser } from '@/app/api/session';
+
+
 
 interface LoginFormInputs {
   email: string;
@@ -19,27 +23,22 @@ const LoginComp = () => {
 
   const onSubmit: SubmitHandler<LoginFormInputs> = async (data) => {
     try {
-      const response = await fetch('/api/login', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(data),
+      const response = await signIn("credentials", {
+        redirect: false, // We handle redirection manually
+        email: data.email,
+        password: data.password,
       });
 
-      if (response.ok) {
-        const result = await response.json();
-        localStorage.setItem('token', result.userData);
-        alert(result.message);
-        console.log(result.userType);
-
-        // Navigate based on user type
-        if (result.userType === "admin") {
-          router.push('/adminDashboard');
+      if (response?.ok) {
+       const session = await getCurrentUser();
+        if (session?.user?.role === 'admin') {
+          router.push('/adminDashboard'); // Redirect to admin dashboard
         } else {
-          router.push('/dashboard');
+          router.push('/dashboard'); // Redirect to user dashboard
         }
-      } else {
-        const errorResponse = await response.json();
-        setError(`Failed to Login: ${errorResponse.message}`);
+      }else {
+       
+        setError(`Failed to Login: `);
       }
     } catch (err) {
       setError("An error occurred. Please try again.");
