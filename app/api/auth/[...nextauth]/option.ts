@@ -45,6 +45,8 @@ export const authOptions: NextAuthOptions = {
     },
   },
   pages: {
-    signIn: '/en/login',  // Adjust your locale routing logic as needed
+    signIn: '/en/login' || '/hi/login',  // Adjust your locale routing logic as needed
   },
+  secret: process.env.NEXTAUTH_SECRET,
+
 };
