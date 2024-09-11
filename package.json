@@ -9,14 +9,17 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@auth/mongodb-adapter": "^3.4.2",
     "@ljharb/tsconfig": "^0.2.0",
     "bcryptjs": "^2.4.3",
     "i18next": "^23.15.0",
     "i18next-browser-languagedetector": "^8.0.0",
     "jsonwebtoken": "^9.0.2",
     "jwt-decode": "^4.0.0",
+    "mongodb": "^6.8.1",
     "mongoose": "^8.6.0",
     "next": "14.2.7",
+    "next-auth": "^4.24.7",
     "next-intl": "^3.19.1",
     "react": "^18",
     "react-dom": "^18",

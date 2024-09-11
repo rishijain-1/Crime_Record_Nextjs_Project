@@ -5,7 +5,6 @@ import { useState } from "react";
 import { useLocale, useTranslations } from "next-intl";
 import { Link } from "@/navigation";
 
-
 interface FormData {
   secretKey: string;  
   name: string;
@@ -15,7 +14,7 @@ interface FormData {
   role: string;
 }
 
-const RegisterComp: React.FC = async () => {
+const RegisterComp: React.FC = () => {
   const {
     register,
     handleSubmit,
@@ -27,7 +26,8 @@ const RegisterComp: React.FC = async () => {
 
   const role = watch("role"); // Watch the role selection
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
-  const active =useLocale();
+  const active = useLocale();
+  const t = useTranslations("RegisterPage");
 
   const onSubmit: SubmitHandler<FormData> = async (data: FormData) => {
     const sendData = {
@@ -36,7 +36,7 @@ const RegisterComp: React.FC = async () => {
       password: data.password,
       role: data.role,
     };
-    console.log(`${process.env.ADMIN_SECRET_KEY}`);
+    
     if (data.role === "admin" && data.secretKey !== "Rishijain") {
       setErrorMessage("Invalid secret key for admin registration.");
       return;
@@ -63,8 +63,6 @@ const RegisterComp: React.FC = async () => {
       alert("An error occurred during registration.");
     }
   };
-
-  const t = await useTranslations("RegisterPage");
 
   return (
     <div className="flex items-center justify-center min-h-screen bg-black">
@@ -197,7 +195,7 @@ const RegisterComp: React.FC = async () => {
         </form>
         <div className="mt-4 text-center text-sm">
           {t('alreadyAccount')}
-          <Link href={{pathname:"/login"}} className="underline bg-blue-800 rounded-md px-4 py-2 text-white">
+          <Link href={{ pathname: "/login" }} className="underline bg-blue-800 rounded-md px-4 py-2 text-white">
             {t('signInBtn')}
           </Link>
         </div>
