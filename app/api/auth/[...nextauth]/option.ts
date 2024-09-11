@@ -1,8 +1,8 @@
-import NextAuth, { NextAuthOptions } from 'next-auth';
 import CredentialsProvider from 'next-auth/providers/credentials';
 import bcrypt from 'bcryptjs';
 import connectMongo from '@/libs/db';
 import User from '@/model/userModel';
+import { NextAuthOptions } from 'next-auth';
 
 export const authOptions: NextAuthOptions = {
   session: {
@@ -18,8 +18,10 @@ export const authOptions: NextAuthOptions = {
       async authorize(credentials) {
         await connectMongo();
 
+        // Find user by email
         const user = await User.findOne({ email: credentials?.email });
 
+        // If no user or password mismatch, return null
         if (!user || !(await bcrypt.compare(credentials?.password || '', user.password))) {
           throw new Error('Invalid credentials');
         }
@@ -43,11 +45,6 @@ export const authOptions: NextAuthOptions = {
     },
   },
   pages: {
-    signIn: '/en/login' || '/hi/login', // Ensure you handle localization in your routing setup
+    signIn: '/en/login',  // Adjust your locale routing logic as needed
   },
 };
-
-// Handler for both GET and POST requests
-const handler = NextAuth(authOptions);
-
-export { handler as GET, handler as POST };
